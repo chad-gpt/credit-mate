@@ -1,0 +1,22 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: okteto/context@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+
+      - uses: okteto/namespace@latest
+
+      - name: "Create stack"
+        uses: okteto/deploy-stack@latest
+        with:
+          build: "true"

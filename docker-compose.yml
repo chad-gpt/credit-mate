@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  user:
+    restart: always
+    image: amalthundiyil/ss-user:latest
+    container_name: ss-user
+    build:
+      context: './ss/user'
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+    ports:
+      - "8000:8000"
+
+volumes:
+  data:
