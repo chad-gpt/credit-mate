@@ -1,5 +1,6 @@
 import os
 from fastapi.exceptions import RequestValidationError
+from datetime import datetime
 from fastapi.responses import JSONResponse
 from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
 from fastapi import FastAPI, APIRouter, HTTPException, Request
@@ -10,13 +11,16 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 import googlemaps
+from pymongo import MongoClient
 
 
-app = FastAPI(
-    title="Ingester",
-)
+
+app = FastAPI(title="Ingester")
 router = APIRouter(prefix="/api/v1")
-gmaps = googlemaps.Client(key=os.environ.get("MAPS_API_KEY"))
+gmaps = googlemaps.Client(key=os.getenv("MAPS_API_KEY"))
+client = MongoClient(os.getenv("MONGO_URL"))
+db = client['defaultdb']
+collection = db['places']
 
 @router.post("/places")
 async def places_nearby(place: Place):
@@ -27,7 +31,7 @@ async def places_nearby(place: Place):
     elif place.lat and place.long:
         location = (place.lat, place.long)
     else:
-        raise HTTPException(detail="Provide text or both lat and longs", status_code=HTTP_422_UNPROCESSABLE_ENTITY)
+        raise HTTPException(detail="Provide text or both latitude and longitude", status_code=HTTP_422_UNPROCESSABLE_ENTITY)
 
     params = {
         'location': location,
@@ -35,6 +39,17 @@ async def places_nearby(place: Place):
         'type': place.types
     }
     response = gmaps.places_nearby(**params)
+
+    now = datetime.utcnow()
+    for res in response["results"]:
+        place_info = res
+        place_info['_id'] = place_info["place_id"]
+        place_info["created_at"] = now
+        place_info["updated_at"] = now
+        result = collection.insert_one(res)
+
     return response
+
+
 
 app.include_router(router)
