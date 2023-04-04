@@ -3,10 +3,8 @@ from datetime import datetime
 from datetime import timedelta
 
 import jwt
-from conf import settings
-from exceptions import AuthTokenCorrupted
-from exceptions import AuthTokenExpired
-from exceptions import AuthTokenMissing
+from .conf import settings
+from .exceptions import AuthTokenCorrupted,AuthTokenExpired,AuthTokenMissing
 SECRET_KEY = os.environ.get('TOKEN_SECRET_KEY')
 ALGORITHM = 'HS256'
 

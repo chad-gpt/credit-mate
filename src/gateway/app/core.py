@@ -3,14 +3,12 @@ from importlib import import_module
 from typing import List
 
 import aiohttp
-from exceptions import AuthTokenCorrupted
-from exceptions import AuthTokenExpired
-from exceptions import AuthTokenMissing
+from .exceptions import AuthTokenCorrupted, AuthTokenExpired, AuthTokenMissing
 from fastapi import HTTPException
 from fastapi import Request
 from fastapi import Response
 from fastapi import status
-from network import make_request
+from .network import make_request
 
 
 def route(
