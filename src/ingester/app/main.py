@@ -24,8 +24,10 @@ async def places_nearby(place: Place):
     if place.text:
         geocode_result = gmaps.geocode(place.text)
         location = geocode_result[0]['geometry']['location']
-    else:
+    elif place.lat and place.long:
         location = (place.lat, place.long)
+    else:
+        raise HTTPException(detail="Provide text or both lat and longs", status_code=HTTP_422_UNPROCESSABLE_ENTITY)
 
     params = {
         'location': location,
