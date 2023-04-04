@@ -1,9 +1,8 @@
 .PHONY: install backend frontend deps clean
 
 install:
-	@echo "\nInstalling backend dependencies\n"
-	pip install -r src/user/requirements.txt
-	@echo "\nInstalling frontend dependencies\n"
+	@pip install -r src/user/requirements.txt
+	@pip install -r src/gateway/requirements.txt
 
 frontend:
 	@cp .env src/frontend/.env
@@ -15,6 +14,7 @@ backend:
 
 deps:
 	@pip-compile -v src/user/requirements.in
+	@pip-compile -v src/gateway/requirements.in
 
 clean:
 	rm -rf venv
