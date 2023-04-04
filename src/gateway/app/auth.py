@@ -32,7 +32,7 @@ def generate_access_token(
 def decode_access_token(authorization: str = None):
     if not authorization:
         raise AuthTokenMissing('Auth token is missing in headers.')
-
+    
     token = authorization.replace('Bearer ', '')
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
