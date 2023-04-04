@@ -3,14 +3,18 @@ version: '3'
 services:
   user:
     restart: always
-    image: amalthundiyil/ss-user:latest
-    container_name: ss-user
+    image: amalthundiyil/cm-user:latest
     build:
-      context: './ss/user'
+      context: './src/user'
+    container_name: cm-user
+    command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
     environment:
       SECRET_KEY: ${SECRET_KEY}
     ports:
-      - "8000:8000"
+      - "8000:80"
+    volumes:
+      - .:/usr/app/src
 
 volumes:
   data:
+    driver: local

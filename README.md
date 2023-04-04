@@ -3,15 +3,15 @@
 </p>
 <h1>
 <p align='center'>
-Streetsmart
+Creditmate
 </p>
 </h1>
 
 <p align='center'>
-<img src="https://github.com/amal-thundiyil/streetsmart/actions/workflows/actions.yml/badge.svg">
-<img src="https://github.com/amal-thundiyil/streetsmart/actions/workflows/deploy.yml/badge.svg">
-<a href="https://github.com/amal-thundiyil/streetsmart/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" > </a>
-<img src="https://visitor-badge.laobi.icu/badge?page_id=amal-thundiyil.streetsmart">
+<img src="https://github.com/amal-thundiyil/credit-mate/actions/workflows/actions.yml/badge.svg">
+<img src="https://github.com/amal-thundiyil/credit-mate/actions/workflows/deploy.yml/badge.svg">
+<a href="https://github.com/amal-thundiyil/credit-mate/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" > </a>
+<img src="https://visitor-badge.laobi.icu/badge?page_id=amal-thundiyil.credit-mate">
 
 ## 📌 Introduction
 
@@ -78,13 +78,14 @@ Streetsmart
 Please read [this](CONTRIBUTING.md) before making contributions. To build the app locally with Docker and docker-compose installed:
 
 ```sh
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 Please see [asdf](https://asdf-vm.com/guide/getting-started.html#local) for contributing with the [versions](.tool-versions) used during development. You can set the versions using:
 ```sh
 asdf local python
 ```
+> If you use pip to install a module like ipython that has binaries. You will need to run `asdf reshim python` for the binary to be in your path.
 
 ## 📝 Future Scope
 

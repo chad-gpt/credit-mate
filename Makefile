@@ -1,16 +1,20 @@
-.PHONY: install backend frontend pip-compile 
+.PHONY: install backend frontend deps clean
 
 install:
 	@echo "\nInstalling backend dependencies\n"
+	pip install -r src/user/requirements.txt
 	@echo "\nInstalling frontend dependencies\n"
 
 frontend:
-	@cp .env streetsmart/frontend/.env
-	@cd streetsmart/frontend && npm start
+	@cp .env src/frontend/.env
+	@cd src/frontend && npm start
 
 backend:
-	@cp .env streetsmart/backend/.env
-	@python streetsmart/backend/manage.py runbackend
+	@cp .env src/backend/.env
+	@python src/backend/manage.py runbackend
 
-pip-compile:
-	@pip-compile -v streetsmart/backend/requirements.in
+deps:
+	@pip-compile -v src/user/requirements.in
+
+clean:
+	rm -rf venv
