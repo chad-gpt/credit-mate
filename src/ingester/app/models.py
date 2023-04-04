@@ -23,6 +23,7 @@ class Place(BaseModel):
         lat = values.get('lat')
         long = values.get('long')
         text = values.get('text')
+        import pdb; pdb.set_trace()
         
         if lat is not None and long is not None and (lat == '' or long == ''):
             raise ValueError('Both lat and long must be provided')

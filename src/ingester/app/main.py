@@ -1,16 +1,24 @@
 import os
-from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from app.models import Place
+import http
+from fastapi import FastAPI, Request, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 import googlemaps
 
 
 app = FastAPI(
     title="Ingester",
-    prefix="/api/v1"
 )
+router = APIRouter(prefix="/api/v1")
 gmaps = googlemaps.Client(key=os.environ.get("MAPS_API_KEY"))
 
-@app.get("/places")
+@router.post("/places")
 async def places_nearby(place: Place):
     response = dict()
     if place.text:
@@ -26,3 +34,5 @@ async def places_nearby(place: Place):
     }
     response = gmaps.places_nearby(**params)
     return response
+
+app.include_router(router)
