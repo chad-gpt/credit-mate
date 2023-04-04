@@ -33,11 +33,11 @@ services:
     build:
       context: './src/gateway'
     container_name: cm-gateway
-    command: sh -c "uvicorn app.main:app --proxy-headers --host"
+    command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
     environment:
       TOKEN_SECRET_KEY: ${TOKEN_SECRET_KEY}
     ports:
-      - "8001:80"
+      - "8002:80"
     volumes:
       - .:/usr/app/src
 volumes:
