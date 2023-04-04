@@ -92,3 +92,4 @@ asdf local python
 - [ ] Onboarding system for companies
 - [ ] Reward collection (like CRED)
 - [ ] E-commerce offerings
+- [ ] Optimize Search (for geofencing too)

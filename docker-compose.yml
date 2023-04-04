@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  ingester:
+    restart: always
+    image: amalthundiyil/cm-ingester:latest
+    build:
+      context: './src/ingester'
+    container_name: cm-ingester
+    command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
+    environment:
+      MAPS_API_KEY: ${MAPS_API_KEY}
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/usr/app/src
   user:
     restart: always
     image: amalthundiyil/cm-user:latest
@@ -11,7 +24,7 @@ services:
     environment:
       SECRET_KEY: ${SECRET_KEY}
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       - .:/usr/app/src
 

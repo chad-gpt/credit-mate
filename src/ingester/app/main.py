@@ -1,15 +1,28 @@
-from typing import Union
-
+import os
 from fastapi import FastAPI
-
-app = FastAPI()
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+from app.models import Place
+import googlemaps
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+app = FastAPI(
+    title="Ingester",
+    prefix="/api/v1"
+)
+gmaps = googlemaps.Client(key=os.environ.get("MAPS_API_KEY"))
+
+@app.get("/places")
+async def places_nearby(place: Place):
+    response = dict()
+    if place.text:
+        geocode_result = gmaps.geocode(place.text)
+        location = geocode_result[0]['geometry']['location']
+    else:
+        location = (place.lat, place.long)
+
+    params = {
+        'location': location,
+        'radius': place.radius,
+        'type': place.types
+    }
+    response = gmaps.places_nearby(**params)
+    return response
