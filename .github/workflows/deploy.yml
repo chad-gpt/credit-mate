@@ -2,21 +2,26 @@ name: CD
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   schedule:
-    - cron: "0 0 * * *"
+    - cron: '0 0 * * *' 
+
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: okteto/context@latest
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - uses: okteto/namespace@latest
+      - name: Install Okteto CLI
+        run: curl https://get.okteto.com -sSfL | sh && sudo mv /usr/local/bin/okteto /usr/bin/okteto
 
-      - name: "Create stack"
-        uses: okteto/deploy-stack@latest
-        with:
-          build: "true"
+      - name: Set Okteto Context
+        run: okteto context use https://cloud.okteto.com --token ${{ secrets.OKTETO_TOKEN }}
+
+      - name: Deploy 
+        run: okteto deploy -n amal-thundiyil
+

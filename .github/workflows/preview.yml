@@ -1,3 +1,5 @@
+name: Staging
+
 on:
   pull_request:
     branches:
@@ -18,5 +20,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: pr-${{ github.event.number }}
+          name: credit-mate-pr-${{ github.event.number }}-amal-thundiyil
           timeout: 15m

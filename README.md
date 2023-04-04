@@ -52,7 +52,7 @@ Creditmate
   - Transactions based
   - Location based and user based
   - Event based (trigger using payments)
-- Notifications (WhatsApp (paid), Mail, Push notifications, SMS)
+- Notifications ( Mail, Push notifications, SMS)
 - Coupon Handling:
   - Affiliates
 - Checkout:
@@ -62,10 +62,10 @@ Creditmate
 ### 🏰 Architecture
 
 **Technology Stack:** 
-- Frontend: Dart, Flutter
+- Frontend: React Native
 - Backend: Python, FastAPI, Apache Kafka
-- Data: Pandas, MongoDB
-- Cloud: Docker, MongoDB Atlas, Okteto Cloud, Confluent, GitHub Actions
+- Data: Pandas, PostgreSQL
+- Cloud: Docker, Cockroach Cloud, Okteto Cloud, Confluent, GitHub Actions
 
 **Services:**
 - Ingester:
