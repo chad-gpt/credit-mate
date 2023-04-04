@@ -17,7 +17,7 @@ jobs:
         run: curl https://get.okteto.com -sSfL | sh && sudo mv /usr/local/bin/okteto /usr/bin/okteto
 
       - name: Set Okteto Context
-        run: okteto context use https://cloud.okteto.com --token $OKTETO_TOKEN
+        run: okteto context use https://cloud.okteto.com --token ${{ secrets.OKTETO_TOKEN }}
 
       - name: Deploy 
         run: okteto deploy -n amal-thundiyil
