@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 aiohttp
 async_timeout
 fastapi
@@ -5,3 +6,10 @@ pydantic
 PyJWT
 uvicorn
 pip-tools
+=======
+aiohttp==3.8.4
+async_timeout==4.0.2
+fastapi==0.95.0
+pydantic==1.10.7
+PyJWT==2.6.0
+>>>>>>> bba718c (Added gateway)

@@ -3,8 +3,15 @@ from datetime import datetime
 from datetime import timedelta
 
 import jwt
+<<<<<<< HEAD
 from .conf import settings
 from .exceptions import AuthTokenCorrupted,AuthTokenExpired,AuthTokenMissing
+=======
+from conf import settings
+from exceptions import AuthTokenCorrupted
+from exceptions import AuthTokenExpired
+from exceptions import AuthTokenMissing
+>>>>>>> bba718c (Added gateway)
 SECRET_KEY = os.environ.get('TOKEN_SECRET_KEY')
 ALGORITHM = 'HS256'
 
@@ -30,7 +37,11 @@ def generate_access_token(
 def decode_access_token(authorization: str = None):
     if not authorization:
         raise AuthTokenMissing('Auth token is missing in headers.')
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> bba718c (Added gateway)
     token = authorization.replace('Bearer ', '')
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)

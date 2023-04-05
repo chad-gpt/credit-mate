@@ -1,6 +1,10 @@
 import aiohttp
 import async_timeout
+<<<<<<< HEAD
 from .conf import settings
+=======
+from conf import settings
+>>>>>>> bba718c (Added gateway)
 
 
 async def make_request(
