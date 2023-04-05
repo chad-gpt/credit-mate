@@ -1,4 +1,4 @@
-.PHONY: install backend frontend deps clean
+.PHONY: install backend frontend deps clean deploy
 
 install:
 	@pip install -r src/user/requirements.txt
@@ -17,6 +17,12 @@ deps:
 	@pip-compile -v src/user/requirements.in
 	@pip-compile -v src/ingester/requirements.in
 	@pip-compile -v src/gateway/requirements.in
+
+deploy:
+	@cp .env .env.bk
+	@okteto context use "https://cloud.okteto.com"
+	@okteto deploy -n amal-thundiyil
+	@cp .env.bk .env
 
 clean:
 	rm -rf venv
