@@ -1,0 +1,7 @@
+aiohttp
+async_timeout
+fastapi
+pydantic
+PyJWT
+uvicorn
+pip-tools
