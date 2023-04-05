@@ -3,3 +3,4 @@ pydantic
 uvicorn
 pip-tools
 python-dotenv
+argon2-cffi
