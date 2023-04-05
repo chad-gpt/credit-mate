@@ -1,16 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../strategy");
+<<<<<<< HEAD
 const { Transaction } = require("../models/transactions");
+<<<<<<< HEAD
 const User = require("../models/user");
+=======
+=======
+const Transaction = require("../models/transactions");
+>>>>>>> 843160c (somethin)
+>>>>>>> 17fa681 (somethin)
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
   async (req, res, next) => {
     try {
       // console.log(req.);
+<<<<<<< HEAD
       const transactionsList = await Transaction.find({});
       return res.status(200).json(transactionsList);
+=======
+      const transactions = await Transaction.find();
+      return res.status(200).json(transactions);
+>>>>>>> 843160c (somethin)
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: error.message });
@@ -18,6 +30,7 @@ router.get(
   }
 );
 
+<<<<<<< HEAD
 router.post("/", async (req, res, next) => {
   try {
     const {
@@ -64,4 +77,27 @@ router.put("/:id", async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
+=======
+router.post(
+  "/",
+  passport.authenticate("user", { session: false }),
+  async (req, res, next) => {
+    try {
+      const {} = req.body;
+      // console.log(req.user);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: error.message });
+    }
+  }
+);
+router.get("/:id", async (req, res, next) => {
+  try {
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+>>>>>>> 843160c (somethin)
 module.exports = router;

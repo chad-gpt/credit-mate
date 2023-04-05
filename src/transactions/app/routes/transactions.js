@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+<<<<<<< HEAD
 const transactions = require("../models/transactions");
 
 router.get("/", async (req, res, next) => {
@@ -19,11 +20,20 @@ router.get("/:id", async (req, res, next) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error" });
+=======
+
+router.get("/", async (req, res, next) => {
+  try {
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+>>>>>>> 843160c (somethin)
   }
 });
 
 router.post("/", async (req, res, next) => {
   try {
+<<<<<<< HEAD
     const { user_id, transactionDate, amount, paymentCompany, product } =
       req.body;
     const newTransaction = await new transactions({
@@ -51,3 +61,17 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 module.exports = router;
+=======
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+});
+router.get("/:id", async (req, res, next) => {
+  try {
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+});
+>>>>>>> 843160c (somethin)

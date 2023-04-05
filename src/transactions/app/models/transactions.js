@@ -13,6 +13,12 @@ const transactionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  transactionType: {
+    type: String,
+  },
+>>>>>>> 843160c (somethin)
   paymentCompany: String,
   product: String,
 });
