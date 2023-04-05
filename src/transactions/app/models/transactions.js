@@ -13,9 +13,6 @@ const transactionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  transactionType: {
-    type: String,
-  },
   paymentCompany: String,
   product: String,
 });

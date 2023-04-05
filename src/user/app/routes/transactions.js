@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../strategy");
-const Transaction = require("../models/transactions");
+const { Transaction } = require("../models/transactions");
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
   async (req, res, next) => {
     try {
       // console.log(req.);
-      const transactions = await Transaction.find();
-      return res.status(200).json(transactions);
+      const transactionsList = await Transaction.find({});
+      return res.status(200).json(transactionsList);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: error.message });
@@ -17,25 +17,42 @@ router.get(
   }
 );
 
-router.post(
-  "/",
-  passport.authenticate("user", { session: false }),
-  async (req, res, next) => {
-    try {
-      const {} = req.body;
-      // console.log(req.user);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: error.message });
-    }
-  }
-);
-router.get("/:id", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
+    const { user_id, transactionDate, amount, paymentCompany, product } =
+      req.body;
+    const newTransaction = await new Transaction({
+      user_id,
+      transactionDate,
+      amount,
+      paymentCompany,
+      product,
+    });
+    newTransaction.save();
+    return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: "Server Error" });
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const transaction = await Transaction.findById(req.params.id);
+    res.status(200).send(transaction);  
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+router.put("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { user_id, transactionDate, amount, paymentCompany, product } =
+      req.body;
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error" });
+  }
+});
 module.exports = router;
