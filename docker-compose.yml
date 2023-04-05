@@ -23,7 +23,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
       ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
-      
+
   ingester:
     restart: always
     image: amalthundiyil/cm-ingester:latest
@@ -64,6 +64,6 @@ services:
       - "8002:80"
     volumes:
       - .:/usr/app/src
- 
+
 volumes:
   data:

@@ -38,7 +38,7 @@ def decode_access_token(authorization: str = None):
     if not authorization:
         raise AuthTokenMissing('Auth token is missing in headers.')
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> bba718c (Added gateway)
