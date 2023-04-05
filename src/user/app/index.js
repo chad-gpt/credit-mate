@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const app = express();
 const cors = require("cors");
 const userRoutes = require("./routes/user");
+const transactionRoutes = require("./routes/transactions");
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 const corsOptions = {
@@ -15,8 +16,8 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(corsOptions));
 
 app.use("/api", userRoutes);
-
-app.get("/", (req, res,next) => {
+app.use("/api/transactions", transactionRoutes);
+app.get("/", (req, res, next) => {
   res.send("Alive");
 });
 
