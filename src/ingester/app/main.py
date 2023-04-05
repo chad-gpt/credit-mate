@@ -15,14 +15,13 @@ from pymongo import MongoClient
 
 
 app = FastAPI(title="Ingester")
-router = APIRouter(prefix="/api")
 gmaps = googlemaps.Client(key=os.getenv("MAPS_API_KEY"))
 client = MongoClient(os.getenv("MONGO_URL"))
 db = client["defaultdb"]
 collection = db["places"]
 
 
-@router.post("/places")
+@app.post("/api/places")
 async def places_nearby(place: Place):
     response = dict()
     if place.text:
@@ -50,9 +49,3 @@ async def places_nearby(place: Place):
     return response
 
 
-@router.get("/ingesterhello")
-def ingesterhello():
-    return {"hello": "world"}
-
-
-app.include_router(router)

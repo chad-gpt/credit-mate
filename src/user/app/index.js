@@ -6,7 +6,7 @@ const User = require("./models/user");
 const cors = require("cors");
 const argon2 = require("argon2");
 dotenv.config();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8002;
 const corsOptions = {
   origin: "*",
 };
