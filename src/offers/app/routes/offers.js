@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const offers = require("../models/offers");
-
+ 
 router.get("/", async (req, res, next) => {
   try {
     const Offers = await offers.find({});
@@ -21,16 +21,18 @@ router.get("/:id", async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
-
+ 
 router.post("/", async (req, res, next) => {
   try {
-    const { image, company, time, status, offer } = req.body;
+    const { image, company, timeStart, timeEnd, tag, status, offer } = req.body;
     const newOffer = await new offers({
       image,
       company,
-      time,
+      timeStart,
+      timeEnd,
       status,
       offer,
+      tag,
     });
     newOffer.save();
     return res.send({ newOffer });
@@ -49,3 +51,4 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 module.exports = router;
+ 
