@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const offers = require("../models/offers");
-router.get("/offers", async (req, res, next) => {
+
+router.get("/", async (req, res, next) => {
   try {
-    const offers = await offers.find({});
-    return res.status.send({ offers });
+    const Offers = await offers.find({});
+    return res.status(200).send({ Offers });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error" });
   }
 });
-router.get("/offers/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const offer = await offers.findOne({ _id: id });
@@ -21,7 +22,7 @@ router.get("/offers/:id", async (req, res, next) => {
   }
 });
 
-router.post("/offers", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const { image, company, time, status, offer } = req.body;
     const newOffer = await new offers({
@@ -38,4 +39,13 @@ router.post("/offers", async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
-router.put("/offers/:id", async (req, res) => {});
+router.put("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { image, company, time, status, offer } = req.body;
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error" });
+  }
+});
+module.exports = router;

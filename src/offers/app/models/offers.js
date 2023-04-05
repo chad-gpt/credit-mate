@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const offerSchema = mongoose.Schema({
   image: String,
-  company: { type: mongoose.Schema.Types.ObjectId, ref: "companies" },
+  company: { type: mongoose.Schema.Types.ObjectId, ref: "places" },
   time: Date,
   status: {
     type: String,
@@ -11,3 +11,5 @@ const offerSchema = mongoose.Schema({
   offer: Number,
 });
 const offers = mongoose.model("offers", offerSchema);
+
+module.exports = offers;

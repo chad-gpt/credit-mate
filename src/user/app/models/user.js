@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
   interests: {
     type: [Interests],
   },
+  coins: {
+    type: Number,
+    default: 0,
+  },
 });
 
 userSchema.methods.generateAuthToken = (data) => {
@@ -45,6 +49,5 @@ userSchema.methods.generateAuthToken = (data) => {
   });
   return token;
 };
-
 
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);
