@@ -18,17 +18,19 @@ app = FastAPI()
 gmaps = googlemaps.Client(key=os.getenv("MAPS_API_KEY"))
 client = MongoClient(os.getenv("MONGO_URL"))
 db = client["test"]
-collection = db["places"]
 
 
 @app.post("/api/places")
-async def places_nearby(place: Place):
+async def offers_nearby(place: Place):
+    places_collection = db["places"]
+    offers_collection = db["offers"]
+
     response = dict()
     if place.text:
         geocode_result = gmaps.geocode(place.text)
         location = geocode_result[0]["geometry"]["location"]
-    elif place.lat and place.long:
-        location = (place.lat, place.long)
+    elif place.lat and place.lng:
+        location = (place.lat, place.lng)
     else:
         raise HTTPException(
             detail="Provide text or both latitude and longitude",
@@ -39,15 +41,19 @@ async def places_nearby(place: Place):
     response = gmaps.places_nearby(**params)
 
     now = datetime.utcnow()
+    offers = {}
     for res in response["results"]:
         filter = {"place_id": res["place_id"]}
-        document = collection.find_one(filter)
+        document = places_collection.find_one(filter)
         place_info = res
         place_info["created_at"] = now
         place_info["updated_at"] = now
         if document:
-            result = collection.update_one(filter, {"$set": place_info})
+            result = places_collection.update_one(filter, {"$set": place_info})
         else:
-            result = collection.insert_one(place_info)
+            result = places_collection.insert_one(place_info)
 
-    return response
+        offer_by_company = offers_collection.find({"company": res["name"]}, {"_id": 0})
+        offers[res["name"]] = list(offer_by_company)
+
+    return offers
