@@ -37,4 +37,32 @@ userSchema.methods.generateAuthToken = (data) => {
 module.exports = {
   User: mongoose.models.User || mongoose.model("User", userSchema),
 
+<<<<<<< HEAD
+=======
+const transactionSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
+  transactionDate: {
+    type: Date,
+    default: Date.now,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  transactionType: {
+    type: String,
+  },
+  paymentCompany: String,
+  product: String,
+});
+
+const Transaction = mongoose.model("Transaction", transactionSchema);
+
+module.exports = {
+  User: mongoose.models.User || mongoose.model("User", userSchema),
+  Transaction,
+>>>>>>> 13e3a56 (amal messes with node)
 };
