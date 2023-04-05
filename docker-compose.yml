@@ -24,6 +24,7 @@ services:
     # command: sh -c "npm run start"
     environment:
       MONGO_URL: ${MONGO_URL}
+      JWTPRIVATEKEY: ${JWTPRIVATEKEY}
     ports:
       - "8002:8002"
     volumes:
