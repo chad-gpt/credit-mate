@@ -21,7 +21,7 @@ deps:
 deploy:
 	@cp .env .env.bk
 	@okteto context use "https://cloud.okteto.com"
-	@okteto deploy -n amal-thundiyil
+	@okteto deploy -n amal-thundiyil --build
 	@cp .env.bk .env
 
 clean:

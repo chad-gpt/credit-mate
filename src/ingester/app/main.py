@@ -17,7 +17,7 @@ from pymongo import MongoClient
 app = FastAPI(title="Ingester")
 gmaps = googlemaps.Client(key=os.getenv("MAPS_API_KEY"))
 client = MongoClient(os.getenv("MONGO_URL"))
-db = client["defaultdb"]
+db = client["chadgpt"]
 collection = db["places"]
 
 
