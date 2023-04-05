@@ -10,6 +10,7 @@ services:
     command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
     environment:
       MAPS_API_KEY: ${MAPS_API_KEY}
+      MONGO_URL: ${MONGO_URL}
     ports:
       - "8001:80"
     volumes:
