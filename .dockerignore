@@ -13,3 +13,4 @@ venv/
 pytest_cache/
 .stignore
 serviceAccountKey.json
+.env.bk
