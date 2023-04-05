@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const argon2 = require("argon2");
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   try {
     const user = await User.findOne({
       email: req.body.email,
@@ -11,10 +11,11 @@ router.post("/login", async (req, res) => {
       return res.status(401).send({ message: "Invalid Email  or Password" });
 
     if (await argon2.verify(user.password, req.body.password)) {
-      //   const token = user.generateAuthToken(); //jwt token
+      const token = user.generateAuthToken(user); //jwt token
       user.password = undefined;
+
       return res.status(200).send({
-        // token: "Bearer " + token,
+        token: "Bearer " + token,
         user,
         message: "Logged In Successfully",
       });
@@ -26,7 +27,7 @@ router.post("/login", async (req, res) => {
     return res.status(500).send({ message: "Internal Server Error" });
   }
 });
-router.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res, next) => {
   try {
     const user = await User.findOne({
       email: req.body.email,
@@ -43,4 +44,4 @@ router.post("/signup", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
-module.exports=router
+module.exports = router;

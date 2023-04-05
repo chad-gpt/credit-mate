@@ -16,7 +16,7 @@ app.use(cors(corsOptions));
 
 app.use("/api", userRoutes);
 
-app.get("/", (req, res) => {
+app.get("/", (req, res,next) => {
   res.send("Alive");
 });
 
