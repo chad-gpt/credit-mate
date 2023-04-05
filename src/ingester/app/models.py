@@ -18,5 +18,3 @@ class Place(BaseModel):
         if v is not None:
             return float(v)
     
-class Hello(BaseModel):
-    hello: str
