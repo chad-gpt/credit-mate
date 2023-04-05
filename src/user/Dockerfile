@@ -1,13 +1,11 @@
-FROM node:14.17.3-alpine3.14
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
-
-RUN npm install -g nodemon
+COPY package*.json ./
 
 RUN npm install
 
 COPY ./ ./
 
-CMD [""]
+CMD ["npm", "run", "start"]

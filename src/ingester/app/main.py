@@ -40,16 +40,13 @@ async def places_nearby(place: Place):
 
     now = datetime.utcnow()
     for res in response["results"]:
-        filter = {"_id": res["place_id"]}
+        filter = {"place_id": res["place_id"]}
         document = collection.find_one(filter)
         place_info = res
-        place_info["_id"] = place_info["place_id"]
         place_info["created_at"] = now
         place_info["updated_at"] = now
         if document:
-            result = collection.update_one(
-                {"_id": place_info["place_id"]}, {"$set": place_info}
-            )
+            result = collection.update_one(filter, {"$set": place_info})
         else:
             result = collection.insert_one(place_info)
 
