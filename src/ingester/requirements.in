@@ -6,3 +6,4 @@ confluent-kafka
 googlemaps
 black
 python-dotenv
+pymongo

@@ -63,9 +63,9 @@ Creditmate
 
 **Technology Stack:** 
 - Frontend: React Native
-- Backend: Python, FastAPI, Apache Kafka
-- Data: Pandas, PostgreSQL
-- Cloud: Docker, Cockroach Cloud, Okteto Cloud, Confluent, GitHub Actions
+- Backend: Python, FastAPI, Apache Kafka, Firebase
+- Data: Pandas, PostgreSQL, MongoDB
+- Cloud: Docker, Cockroach Cloud, MongoDB Cloud, Okteto Cloud, Confluent, GitHub Actions, Firebase
 
 **Services:**
 - Ingester:
