@@ -24,8 +24,8 @@ cred = credentials.Certificate(firebase_config)
 firebase_admin.initialize_app(cred)
 
 
-@app.get("/api/hello")
-def hello():
+@app.get("/userhello")
+def userhello():
     return {"hello": "world"}
 
 

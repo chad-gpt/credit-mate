@@ -14,42 +14,45 @@ import googlemaps
 from pymongo import MongoClient
 
 
-
 app = FastAPI(title="Ingester")
-router = APIRouter(prefix="/api/v1")
+router = APIRouter(prefix="/api")
 gmaps = googlemaps.Client(key=os.getenv("MAPS_API_KEY"))
 client = MongoClient(os.getenv("MONGO_URL"))
-db = client['defaultdb']
-collection = db['places']
+db = client["defaultdb"]
+collection = db["places"]
 
-@router.post("/nearby")
+
+@router.post("/places")
 async def places_nearby(place: Place):
     response = dict()
     if place.text:
         geocode_result = gmaps.geocode(place.text)
-        location = geocode_result[0]['geometry']['location']
+        location = geocode_result[0]["geometry"]["location"]
     elif place.lat and place.long:
         location = (place.lat, place.long)
     else:
-        raise HTTPException(detail="Provide text or both latitude and longitude", status_code=HTTP_422_UNPROCESSABLE_ENTITY)
+        raise HTTPException(
+            detail="Provide text or both latitude and longitude",
+            status_code=HTTP_422_UNPROCESSABLE_ENTITY,
+        )
 
-    params = {
-        'location': location,
-        'radius': place.radius,
-        'type': place.types
-    }
+    params = {"location": location, "radius": place.radius, "type": place.types}
     response = gmaps.places_nearby(**params)
 
     now = datetime.utcnow()
     for res in response["results"]:
         place_info = res
-        place_info['_id'] = place_info["place_id"]
+        place_info["_id"] = place_info["place_id"]
         place_info["created_at"] = now
         place_info["updated_at"] = now
         result = collection.insert_one(res)
 
     return response
 
+
+@router.get("/ingesterhello")
+def ingesterhello():
+    return {"hello": "world"}
 
 
 app.include_router(router)

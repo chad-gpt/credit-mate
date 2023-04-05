@@ -28,13 +28,27 @@ async def login(
 
 @route(
     request_method=app.get,
-    path="/api/hello",
+    path="/api/userping",
     status_code=status.HTTP_200_OK,
     payload_key="data",
-    service_url=settings.USERS_SERVICE_URL,
+    service_url=settings.USER_SERVICE_URL,
     authentication_required=False,
     post_processing_func=None,
     response_model='app.types.users.Hello',
 )
-async def hello(request: Request, response: Response):
+async def userping(request: Request, response: Response):
     pass
+
+@route(
+    request_method=app.get,
+    path="/api/ingesterping",
+    status_code=status.HTTP_200_OK,
+    payload_key="data",
+    service_url=settings.INGESTER_SERVICE_URL,
+    authentication_required=False,
+    post_processing_func=None,
+    response_model='app.types.users.Hello',
+)
+async def ingesterping(request: Request, response: Response):
+    pass
+
