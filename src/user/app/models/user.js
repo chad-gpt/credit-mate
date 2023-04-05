@@ -1,21 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const Interests = new mongoose.Schema({
-  value: {
-    type: String,
-    enum: [
-      "Hotel",
-      "Utility",
-      "Grocery",
-      "Food",
-      "Shopping",
-      "Travel",
-      "Gaming",
-      "Movies",
-      "Health",
-    ],
-  },
-});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -50,4 +35,29 @@ userSchema.methods.generateAuthToken = (data) => {
   return token;
 };
 
-module.exports = mongoose.models.User || mongoose.model("User", userSchema);
+const transactionSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
+  transactionDate: {
+    type: Date,
+    default: Date.now,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  transactionType: {
+    type: String,
+  },
+  paymentCompany: String,
+  product: String,
+});
+
+const Transaction = mongoose.model("Transaction", transactionSchema);
+
+module.exports = {
+  User: mongoose.models.User || mongoose.model("User", userSchema),
+  Transaction,
+};
