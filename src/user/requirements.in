@@ -1,7 +1,0 @@
-fastapi
-pydantic
-uvicorn
-firebase-admin
-pip-tools
-stripe
-pymongo

@@ -10,8 +10,9 @@ services:
     command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
     environment:
       MAPS_API_KEY: ${MAPS_API_KEY}
+      MONGO_URL: ${MONGO_URL}
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       - .:/usr/app/src
   user:
@@ -20,26 +21,13 @@ services:
     build:
       context: './src/user'
     container_name: cm-user
-    command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
+    # command: sh -c "npm run start"
     environment:
-      SECRET_KEY: ${SECRET_KEY}
+      MONGO_URL: ${MONGO_URL}
     ports:
-      - "8001:80"
+      - "8002:8002"
     volumes:
       - .:/usr/app/src
-  gateway:
-    restart: always
-    image: amalthundiyil/cm-gateway:latest
-    build:
-      context: './src/gateway'
-    container_name: cm-gateway
-    command: sh -c "uvicorn app.main:app --proxy-headers --host 0.0.0.0 --port 80"
-    environment:
-      TOKEN_SECRET_KEY: ${TOKEN_SECRET_KEY}
-      USERS_SERVICE_URL: ${USERS_SERVICE_URL}
-    ports:
-      - "8002:80"
-    volumes:
-      - .:/usr/app/src
+
 volumes:
   data:

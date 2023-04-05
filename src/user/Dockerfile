@@ -1,9 +1,10 @@
-FROM python:3.7.13
+FROM node:18-alpine
 
-WORKDIR /code
+WORKDIR /usr/src/app
 
-COPY ./requirements.txt /code/requirements.txt
+COPY package*.json ./
+RUN npm install
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY ./ ./
 
-COPY ./app /code/app
+CMD [ "npm", "run" , "start"]
