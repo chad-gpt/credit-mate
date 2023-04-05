@@ -22,6 +22,7 @@ async def login(body: EmailPasswordForm,
                 request: Request, response: Response):
     print(body)
     pass
+{"hello":"world"}
 
 @route(
     request_method=app.get,

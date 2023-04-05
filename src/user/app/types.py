@@ -5,7 +5,7 @@ class User(BaseModel):
     lastName:str
     email:str
     password:str
-    
+
 class UserCreationForm(BaseModel):
     firstName:str
     lastName:str

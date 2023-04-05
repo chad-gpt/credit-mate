@@ -1,7 +1,8 @@
+from fastapi import HTTPException
+from fastapi import status
 
-from .types import User
 from .db import db
-from fastapi import  HTTPException,status
+from .types import User
 # to be completed
 UserCollection=db['users']
 

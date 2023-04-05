@@ -1,9 +1,17 @@
 from typing import Union
-from .services import get_user_by_email,createUser
-from .types import UserEmailPasswordForm,UserCreationForm
+
 from argon2 import PasswordHasher
-from fastapi import FastAPI, HTTPException, status, Request, Response 
+from fastapi import FastAPI
+from fastapi import HTTPException
+from fastapi import Request
+from fastapi import Response
+from fastapi import status
+
 from .db import db
+from .services import createUser
+from .services import get_user_by_email
+from .types import UserCreationForm
+from .types import UserEmailPasswordForm
 
 ph = PasswordHasher()
 app = FastAPI()
@@ -31,7 +39,7 @@ async def login(form_data: UserEmailPasswordForm):
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail='Password is wrong.',
             )
-            
+
         return user_in_db
     except Exception as e:
         raise HTTPException(
@@ -62,6 +70,3 @@ async def signup(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Password is wrong.',
         )
-    
-    
-    
