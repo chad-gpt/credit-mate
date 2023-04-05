@@ -6,12 +6,16 @@ import os
 import stripe
 from pymongo import MongoClient
 
-router = APIRouter(prefix="/api/v1")
+router = APIRouter(prefix="/api")
 stripe.api_key = "YOUR_API_KEY"
 
 @router.get('/private')
 def private_route(user=Depends(verify_firebase_token)):
     return {'message': f'Hello {user.email}, you are authorized to access this route'}
+
+@router.get("/public")
+def public():
+    return {"Hello": "World"}
 
 @router.post("/charge")
 async def charge(request: Request):

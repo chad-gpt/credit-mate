@@ -2,21 +2,26 @@ from typing import Union
 
 import os
 from fastapi import FastAPI
-from app.auth import firebase_middleware
 from fastapi import FastAPI, APIRouter, HTTPException, Request, Depends
 import firebase_admin
 from firebase_admin import credentials
 from app.auth import verify_firebase_token
+from app.payments import router as payment_router
 
 from fastapi import FastAPI
-from users import router as user_router
-from products import router as product_router
 
 app = FastAPI()
 
-cred = credentials.Certificate("path/to/serviceAccountKey.json")
+firebase_config = {
+    "projectId": os.getenv("GOOGLE_CLOUD_PROJECT"),
+    "private_key": os.getenv("FIREBASE_PRIVATE_KEY").replace('\\n', '\n'),
+    "client_email": os.getenv("FIREBASE_CLIENT_EMAIL"),
+    "token_uri": os.getenv("FIREBASE_TOKEN_URI"),
+    "type" : "service_account"
+}
+
+cred = credentials.Certificate(firebase_config)
 firebase_admin.initialize_app(cred)
 
-app.include_router(user_router)
-app.include_router(product_router)
+app.include_router(payment_router)
 

@@ -22,7 +22,7 @@ client = MongoClient(os.getenv("MONGO_URL"))
 db = client['defaultdb']
 collection = db['places']
 
-@router.post("/places")
+@router.post("/nearby")
 async def places_nearby(place: Place):
     response = dict()
     if place.text:

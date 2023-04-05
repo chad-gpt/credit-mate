@@ -12,3 +12,4 @@ Makefile
 venv/
 pytest_cache/
 .stignore
+serviceAccountKey.json
