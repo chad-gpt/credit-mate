@@ -4,10 +4,15 @@ const dotenv = require("dotenv");
 const app = express();
 const cors = require("cors");
 <<<<<<< HEAD
+<<<<<<< HEAD
 const transactionsRoutes = require("./routes/transactions");
 
 =======
 >>>>>>> 843160c (somethin)
+=======
+const transactionsRoutes = require("./routes/transactions");
+
+>>>>>>> 19e2459 (somethin)
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -20,10 +25,14 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(corsOptions));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.use("/api/transactions", transactionsRoutes);
 =======
 app.use("/api", );
 >>>>>>> 843160c (somethin)
+=======
+app.use("/api/transactions", transactionsRoutes);
+>>>>>>> 19e2459 (somethin)
 
 app.get("/", (req, res, next) => {
   res.send("Alive");

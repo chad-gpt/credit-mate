@@ -34,6 +34,7 @@ userSchema.methods.generateAuthToken = (data) => {
   });
   return token;
 };
+<<<<<<< HEAD
 module.exports = {
   User: mongoose.models.User || mongoose.model("User", userSchema),
 
@@ -65,4 +66,9 @@ module.exports = {
   User: mongoose.models.User || mongoose.model("User", userSchema),
   Transaction,
 >>>>>>> 13e3a56 (amal messes with node)
+=======
+module.exports = {
+  User: mongoose.models.User || mongoose.model("User", userSchema),
+
+>>>>>>> 19e2459 (somethin)
 };

@@ -14,11 +14,14 @@ const transactionSchema = new mongoose.Schema({
     required: true,
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   transactionType: {
     type: String,
   },
 >>>>>>> 843160c (somethin)
+=======
+>>>>>>> 19e2459 (somethin)
   paymentCompany: String,
   product: String,
 });
