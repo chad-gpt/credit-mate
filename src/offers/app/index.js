@@ -15,7 +15,7 @@ app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(corsOptions));
 
-app.use("/offers", offerRoutes);
+app.use("/api/offers", offerRoutes);
 app.get("/", (req, res, next) => {
   res.send("Alive");
 });
