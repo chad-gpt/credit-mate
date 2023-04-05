@@ -1,9 +1,7 @@
 .PHONY: install backend frontend deps clean deploy
 
 install:
-	@pip install -r src/user/requirements.txt
 	@pip install -r src/ingester/requirements.txt
-	@pip install -r src/gateway/requirements.txt
 
 frontend:
 	@cp .env src/frontend/.env
@@ -14,9 +12,7 @@ backend:
 	@python src/backend/manage.py runbackend
 
 deps:
-	@pip-compile -v src/user/requirements.in
 	@pip-compile -v src/ingester/requirements.in
-	@pip-compile -v src/gateway/requirements.in
 
 deploy:
 	@cp .env .env.bk
