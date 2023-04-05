@@ -24,8 +24,24 @@ services:
     # command: sh -c "npm run start"
     environment:
       MONGO_URL: ${MONGO_URL}
+      JWTPRIVATEKEY: ${JWTPRIVATEKEY}
     ports:
-      - "8002:8002"
+      - "8002:8000"
+    volumes:
+      - .:/usr/app/src
+
+  offers:
+    restart: always
+    image: amalthundiyil/cm-offers:latest
+    build:
+      context: './src/offers'
+    container_name: cm-offers
+    # command: sh -c "npm run start"
+    environment:
+      MONGO_URL: ${MONGO_URL}
+      JWTPRIVATEKEY: ${JWTPRIVATEKEY}
+    ports:
+      - "8002:8000"
     volumes:
       - .:/usr/app/src
 
