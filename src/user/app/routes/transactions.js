@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../strategy");
 const { Transaction } = require("../models/transactions");
-const User = require("../models/user");
+const {User} = require("../models/user");
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
