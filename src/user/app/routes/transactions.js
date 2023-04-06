@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../strategy");
 const { Transaction } = require("../models/transactions");
-const {User} = require("../models/user");
+const { User } = require("../models/user");
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
@@ -28,6 +28,7 @@ router.post("/", async (req, res, next) => {
       paymentCompany,
       product,
     } = req.body;
+
     const newTransaction = await new Transaction({
       user_id,
       transactionDate,
@@ -37,8 +38,12 @@ router.post("/", async (req, res, next) => {
       product,
     });
     newTransaction.save();
-    User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
-    return res.send({ newTransaction });
+    const updatedUser = User.findOneAndUpdate(
+      { _id: user_id },
+      { $inc: { coins: amount * 0.1 } },
+      { returnOriginal: false }
+    );
+    return res.send({ newTransaction, updatedUser });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error" });
