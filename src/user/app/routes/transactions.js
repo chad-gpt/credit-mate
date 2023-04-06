@@ -63,7 +63,12 @@ router.post("/", async (req, res, next) => {
       product,
     });
     newTransaction.save();
+<<<<<<< HEAD
     User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
+=======
+    user.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
+<<<<<<< HEAD
+>>>>>>> d5f4360 (somethin)
     return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
@@ -119,6 +124,8 @@ router.post("/", async (req, res, next) => {
       product,
     });
     newTransaction.save();
+=======
+>>>>>>> 570498a (somethin)
     return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
@@ -132,7 +139,7 @@ router.post("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const transaction = await Transaction.findById(req.params.id);
-    res.status(200).send(transaction);  
+    res.status(200).send(transaction);
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "Internal Server Error" });
