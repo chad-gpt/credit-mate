@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
+const { User } = require("../models/user");
 const argon2 = require("argon2");
 
 router.post("/login", async (req, res, next) => {
@@ -45,7 +45,13 @@ router.post("/signup", async (req, res, next) => {
     }).save();
     const token = newUser.generateAuthToken(newUser); //jwt token
     newUser.password = undefined;
-    res.status(201).send({ message: "User Created successfully", user:newUser, token: "Bearer " + token });
+    res
+      .status(201)
+      .send({
+        message: "User Created successfully",
+        user: newUser,
+        token: "Bearer " + token,
+      });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: "Internal Server Error" });

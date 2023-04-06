@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const userRoutes = require("./routes/user");
 const transactionRoutes = require("./routes/transactions");
+const couponRoutes = require("./routes/coupons");
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 const corsOptions = {
@@ -17,7 +18,7 @@ app.use(cors(corsOptions));
 
 app.use("/api", userRoutes);
 app.use("/api/transactions", transactionRoutes);
-app.use("")
+app.use("/api/coupons", couponRoutes);
 app.get("/", (req, res, next) => {
   res.send("Alive");
 });

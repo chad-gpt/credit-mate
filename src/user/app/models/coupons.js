@@ -32,4 +32,7 @@ const couponSchema = new mongoose.Schema({
   offer: Number,
 });
 
-module.exports = mongoose.model("coupons", couponSchema);
+module.exports = {
+  Coupons: mongoose.model("coupons", couponSchema),
+  generateCouponCode,
+};

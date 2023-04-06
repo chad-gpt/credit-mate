@@ -64,4 +64,15 @@ router.put("/:id", async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const transactions = await Transaction.find({ user_id: id });
+    res.status(200).send(transactions);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
