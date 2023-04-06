@@ -18,7 +18,7 @@ router.post("/", async (req, res, next) => {
     const code = generateCouponCode();
     const coins = generateRandomCoins(1, 50);
 
-    const newCoupon = Coupons({
+    const newCoupon = new Coupons({
       image,
       company,
       timeStart,
@@ -28,11 +28,12 @@ router.post("/", async (req, res, next) => {
       code,
       noOfCoins: coins,
     });
-    newCoupon.save();
+    await newCoupon.save();
     return res.send({ newCoupon });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error" });
   }
 });
+
 module.exports = router;
