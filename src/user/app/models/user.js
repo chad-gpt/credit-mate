@@ -1,21 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const Interests = new mongoose.Schema({
-  value: {
-    type: String,
-    enum: [
-      "Hotel",
-      "Utility",
-      "Grocery",
-      "Food",
-      "Shopping",
-      "Travel",
-      "Gaming",
-      "Movies",
-      "Health",
-    ],
-  },
-});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -49,5 +34,7 @@ userSchema.methods.generateAuthToken = (data) => {
   });
   return token;
 };
+module.exports = {
+  User: mongoose.models.User || mongoose.model("User", userSchema),
 
-module.exports = mongoose.models.User || mongoose.model("User", userSchema);
+};

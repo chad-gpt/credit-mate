@@ -37,8 +37,13 @@ router.post("/signup", async (req, res, next) => {
         .status(409)
         .send({ message: "Admin with given Email already exists!" });
     const hashPassword = await argon2.hash(req.body.password);
-    await new User({ ...req.body, password: hashPassword }).save();
-    res.status(201).send({ message: "User Created successfully" });
+    const newUser = await new User({
+      ...req.body,
+      password: hashPassword,
+    }).save();
+    const token = newUser.generateAuthToken(newUser); //jwt token
+    newUser.password = undefined;
+    res.status(201).send({ message: "User Created successfully", user:newUser, token: "Bearer " + token });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: "Internal Server Error" });
