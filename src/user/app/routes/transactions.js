@@ -36,8 +36,8 @@ router.post("/", async (req, res, next) => {
       paymentCompany,
       transactionType,
       product,
-    });
-    newTransaction.save();
+    }).save();
+
     const updatedUser = User.findOneAndUpdate(
       { _id: user_id },
       { $inc: { coins: amount * 0.1 } },
