@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const argon2 = require("argon2");
+
 router.post("/login", async (req, res, next) => {
   try {
     const user = await User.findOne({
@@ -27,6 +28,7 @@ router.post("/login", async (req, res, next) => {
     return res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
 router.post("/signup", async (req, res, next) => {
   try {
     const user = await User.findOne({

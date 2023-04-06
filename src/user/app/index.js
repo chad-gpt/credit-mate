@@ -17,6 +17,7 @@ app.use(cors(corsOptions));
 
 app.use("/api", userRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("")
 app.get("/", (req, res, next) => {
   res.send("Alive");
 });
