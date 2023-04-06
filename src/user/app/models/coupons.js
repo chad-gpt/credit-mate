@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-function generateString(length) {
+function generateString(length, characters) {
   let result = " ";
   const charactersLength = characters.length;
   for (let i = 0; i < length; i++) {
@@ -13,7 +13,7 @@ function generateString(length) {
 const generateCouponCode = () => {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  return generateString(5);
+  return generateString(5, characters);
 };
 
 const couponSchema = new mongoose.Schema({
