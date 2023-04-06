@@ -112,6 +112,7 @@ router.put("/:id", async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
+<<<<<<< HEAD
 =======
 router.post(
   "/",
@@ -157,11 +158,19 @@ router.get("/:id", async (req, res, next) => {
   try {
     const transaction = await Transaction.findById(req.params.id);
     res.status(200).send(transaction);
+=======
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const transactions = await Transaction.find({ user_id: id });
+    res.status(200).send(transactions);
+>>>>>>> 6f4e036 (Added stuff)
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "Internal Server Error" });
   }
 });
+<<<<<<< HEAD
 router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -173,4 +182,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 >>>>>>> 19e2459 (somethin)
+=======
+
+>>>>>>> 6f4e036 (Added stuff)
 module.exports = router;
