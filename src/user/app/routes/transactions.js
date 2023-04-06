@@ -38,7 +38,7 @@ router.post("/", async (req, res, next) => {
       product,
     }).save();
 
-    const updatedUser = User.findOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       { _id: user_id },
       { $inc: { coins: amount * 0.1 } },
       { returnOriginal: false }
