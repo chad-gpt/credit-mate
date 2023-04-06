@@ -34,47 +34,7 @@ userSchema.methods.generateAuthToken = (data) => {
   });
   return token;
 };
-<<<<<<< HEAD
 module.exports = {
   User: mongoose.models.User || mongoose.model("User", userSchema),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 87f9341 (somethin)
-const transactionSchema = new mongoose.Schema({
-  user_id: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
-  },
-  transactionDate: {
-    type: Date,
-    default: Date.now,
-  },
-  amount: {
-    type: Number,
-    required: true,
-  },
-  transactionType: {
-    type: String,
-  },
-  paymentCompany: String,
-  product: String,
-});
-
-const Transaction = mongoose.model("Transaction", transactionSchema);
-
-module.exports = {
-  User: mongoose.models.User || mongoose.model("User", userSchema),
-  Transaction,
-<<<<<<< HEAD
->>>>>>> 13e3a56 (amal messes with node)
-=======
-module.exports = {
-  User: mongoose.models.User || mongoose.model("User", userSchema),
-
->>>>>>> 19e2459 (somethin)
-=======
->>>>>>> 87f9341 (somethin)
 };

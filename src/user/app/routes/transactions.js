@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../strategy");
-<<<<<<< HEAD
-<<<<<<< HEAD
 const { Transaction } = require("../models/transactions");
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 const User = require("../models/user");
@@ -26,24 +25,17 @@ const { Transaction } = require("../models/transactions");
 const User = require("../models/user");
 >>>>>>> ebab75d (Added stuff)
 >>>>>>> 25e93f9 (Added stuff)
+=======
+const User = require("../models/user");
+>>>>>>> 1ccf6ae (asdf)
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
   async (req, res, next) => {
     try {
       // console.log(req.);
-<<<<<<< HEAD
-<<<<<<< HEAD
       const transactionsList = await Transaction.find({});
       return res.status(200).json(transactionsList);
-=======
-      const transactions = await Transaction.find();
-      return res.status(200).json(transactions);
->>>>>>> 843160c (somethin)
-=======
-      const transactionsList = await Transaction.find({});
-      return res.status(200).json(transactionsList);
->>>>>>> 19e2459 (somethin)
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: error.message });
@@ -51,8 +43,6 @@ router.get(
   }
 );
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 router.post("/", async (req, res, next) => {
   try {
     const {
@@ -74,6 +64,7 @@ router.post("/", async (req, res, next) => {
     newTransaction.save();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
 =======
     user.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
@@ -86,6 +77,9 @@ router.post("/", async (req, res, next) => {
     User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
 >>>>>>> ebab75d (Added stuff)
 >>>>>>> 25e93f9 (Added stuff)
+=======
+    User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
+>>>>>>> 1ccf6ae (asdf)
     return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
@@ -112,77 +106,15 @@ router.put("/:id", async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
-<<<<<<< HEAD
-=======
-router.post(
-  "/",
-  passport.authenticate("user", { session: false }),
-  async (req, res, next) => {
-    try {
-      const {} = req.body;
-      // console.log(req.user);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: error.message });
-    }
-  }
-);
-router.get("/:id", async (req, res, next) => {
-=======
-router.post("/", async (req, res, next) => {
->>>>>>> 19e2459 (somethin)
-  try {
-    const { user_id, transactionDate, amount, paymentCompany, product } =
-      req.body;
-    const newTransaction = await new Transaction({
-      user_id,
-      transactionDate,
-      amount,
-      paymentCompany,
-      product,
-    });
-    newTransaction.save();
-=======
->>>>>>> 570498a (somethin)
-    return res.send({ newTransaction });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Server Error" });
-  }
-});
-
-<<<<<<< HEAD
->>>>>>> 843160c (somethin)
-=======
-router.get("/:id", async (req, res, next) => {
-  try {
-    const transaction = await Transaction.findById(req.params.id);
-    res.status(200).send(transaction);
-=======
 router.get("/user/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const transactions = await Transaction.find({ user_id: id });
     res.status(200).send(transactions);
->>>>>>> 6f4e036 (Added stuff)
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "Internal Server Error" });
   }
 });
-<<<<<<< HEAD
-router.put("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { user_id, transactionDate, amount, paymentCompany, product } =
-      req.body;
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Server Error" });
-  }
-});
->>>>>>> 19e2459 (somethin)
-=======
 
->>>>>>> 6f4e036 (Added stuff)
 module.exports = router;
