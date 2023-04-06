@@ -5,8 +5,11 @@ const passport = require("../strategy");
 <<<<<<< HEAD
 const { Transaction } = require("../models/transactions");
 <<<<<<< HEAD
+<<<<<<< HEAD
 const User = require("../models/user");
 =======
+=======
+>>>>>>> 25e93f9 (Added stuff)
 =======
 const Transaction = require("../models/transactions");
 >>>>>>> 843160c (somethin)
@@ -16,7 +19,13 @@ const Transaction = require("../models/transactions");
 =======
 const { Transaction } = require("../models/transactions");
 >>>>>>> 19e2459 (somethin)
+<<<<<<< HEAD
 >>>>>>> d91fd28 (somethin)
+=======
+=======
+const User = require("../models/user");
+>>>>>>> ebab75d (Added stuff)
+>>>>>>> 25e93f9 (Added stuff)
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
@@ -64,11 +73,19 @@ router.post("/", async (req, res, next) => {
     });
     newTransaction.save();
 <<<<<<< HEAD
+<<<<<<< HEAD
     User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
 =======
     user.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
 <<<<<<< HEAD
 >>>>>>> d5f4360 (somethin)
+=======
+    user.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
+<<<<<<< HEAD
+=======
+    User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
+>>>>>>> ebab75d (Added stuff)
+>>>>>>> 25e93f9 (Added stuff)
     return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
