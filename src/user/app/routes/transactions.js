@@ -29,6 +29,7 @@ router.post("/", async (req, res, next) => {
       product,
     });
     newTransaction.save();
+    user.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
     return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
@@ -39,7 +40,7 @@ router.post("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const transaction = await Transaction.findById(req.params.id);
-    res.status(200).send(transaction);  
+    res.status(200).send(transaction);
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "Internal Server Error" });
