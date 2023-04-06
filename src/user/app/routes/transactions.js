@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../strategy");
 const { Transaction } = require("../models/transactions");
+const User = require("../models/user");
 router.get(
   "/",
   // passport.authenticate("user", { session: false }),
@@ -19,17 +20,24 @@ router.get(
 
 router.post("/", async (req, res, next) => {
   try {
-    const { user_id, transactionDate, amount, paymentCompany, product } =
-      req.body;
+    const {
+      user_id,
+      transactionDate,
+      transactionType,
+      amount,
+      paymentCompany,
+      product,
+    } = req.body;
     const newTransaction = await new Transaction({
       user_id,
       transactionDate,
       amount,
       paymentCompany,
+      transactionType,
       product,
     });
     newTransaction.save();
-    user.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
+    User.findOneAndUpdate({ _id: user_id }, { $inc: { coins: amount * 0.1 } });
     return res.send({ newTransaction });
   } catch (error) {
     console.error(error);
